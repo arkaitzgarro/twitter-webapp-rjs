@@ -16,11 +16,15 @@
         var expect = chai.expect;
         var should = chai.should();
     </script>
+    <script src="bower_components/sinon/lib/sinon.js"></script>
+    <script src="bower_components/sinon/lib/sinon/call.js"></script>
+    <script src="bower_components/sinon/lib/sinon/spy.js"></script>
 
     <!-- include source files here... -->
     <script src="../app/bower_components/requirejs/require.js"></script>
     <!-- include spec files here... -->
     <script src="spec/testDB.js"></script>
+    <script src="spec/testService.js"></script>
 
     <script>mocha.run()</script>
 </body>
