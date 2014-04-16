@@ -19,18 +19,21 @@
     describe('DataBase module', function () {
         var DB;
 
-        beforeEach(function(done){
+        before(function(done){
             require(['Data'], function(data){
                 DB = data;
-                done();
+
+                DB.clear(function(){
+                    done();
+                });
             });
         });
 
-        after(function(done){
-            DB.clear(function(){
-                done();
-            });
-        });
+        // after(function(done){
+        //     DB.clear(function(){
+        //         done();
+        //     });
+        // });
 
         describe('#addTweet', function () {
             it('Add one tweet', function (done) {
@@ -77,6 +80,17 @@
             it('Get non existing tweet', function (done) {
                 DB.getTweet('0', function(tweet){
                     assert.isUndefined(tweet);
+                    done();
+                }, function(err){
+                    throw err;
+                });
+            });
+        });
+
+        describe('#getTweets', function () {
+            it('Get all tweets', function (done) {
+                DB.getTweets(function(tweets){
+                    assert.equal(3, tweets.length);
                     done();
                 }, function(err){
                     throw err;

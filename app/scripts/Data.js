@@ -4,7 +4,12 @@ define('Data', ['ydn-db'], function(ydn) {
     var dbName = 'TwitterDB',
         keyPath = 'id',
         tweetTable = 'twitter',
-        db = new ydn.db.Storage(dbName);
+        db = new ydn.db.Storage(dbName, {
+            stores : [{
+                name : tweetTable,
+                keyPath : keyPath
+            }]
+        });
 
     var addTweet = function(tweet, success, error) {
         var req = db.add({name: tweetTable, keyPath: keyPath}, tweet);
@@ -20,6 +25,12 @@ define('Data', ['ydn-db'], function(ydn) {
 
     var getTweet = function(id, success, error) {
         var req = db.get(tweetTable, id);
+        req.done(success);
+        req.fail(error);
+    };
+
+    var getTweets = function(success, error) {
+        var req = db.values(tweetTable);
         req.done(success);
         req.fail(error);
     };
@@ -51,13 +62,14 @@ define('Data', ['ydn-db'], function(ydn) {
     var clear = function(success, error){
         var req = db.clear(tweetTable);
         req.done(success);
-        req.fail(error);
+        req.fail(error);        
     };
 
     return {
         addTweet : addTweet,
         addTweets : addTweets,
         getTweet : getTweet,
+        getTweets : getTweets,
         updateTweet : updateTweet,
         removeTweet : removeTweet,
         clear : clear
