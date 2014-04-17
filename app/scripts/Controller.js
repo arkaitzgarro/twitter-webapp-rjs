@@ -1,11 +1,17 @@
-define('Controller', ['Data', 'Service'], function(DB, srv){
+define('Controller', ['Data', 'Service', 'UI'], function(DB, srv, UI){
     'use strict';
 
-    var getTweetsFromTwitter = function() {
-        srv.getTweets({}, processTweets, error);
+    console.log('Controller module started');
+
+    var getTweetsFromTwitter = function(success, error) {
+        srv.getTweets({}, function(data) {
+            processTweets(data, function(tweets){
+                DB.addTweets(tweets, success, error);
+            }, error);
+        }, error);
     };
 
-    var processTweets = function(data) {
+    var processTweets = function(data, success, error) {
         var tweets = [];
 
         if(data && data.statuses && data.statuses.length > 0) {
@@ -23,15 +29,20 @@ define('Controller', ['Data', 'Service'], function(DB, srv){
                 tweets.push(tweet);
             };
             
-            DB.addTweets(tweets);
+            success(tweets);
         }
     };
 
-    var error = function(){
+    var notify = function() {
+        // Get latest data from data provider
+        var tweets = DB.getLatestData({limit : 50});
 
+        // Update views
+        UI.showTweetsList(tweets);
     };
 
     return {
-        getTweetsFromTwitter : getTweetsFromTwitter
+        getTweetsFromTwitter : getTweetsFromTwitter,
+        notify : notify
     };
 });

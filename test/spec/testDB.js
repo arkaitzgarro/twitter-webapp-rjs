@@ -23,17 +23,12 @@
             require(['Data'], function(data){
                 DB = data;
 
+                DB.init();
                 DB.clear(function(){
                     done();
                 });
             });
         });
-
-        // after(function(done){
-        //     DB.clear(function(){
-        //         done();
-        //     });
-        // });
 
         describe('#addTweet', function () {
             it('Add one tweet', function (done) {
@@ -59,7 +54,7 @@
                     {id:'22222', text:'Mocha testing v3'}
                 ];
 
-                DB.addTweet(tweets, function(keys){
+                DB.addTweets(tweets, function(keys){
                     assert.equal(2, keys.length);
                     done();
                 }, function(err){

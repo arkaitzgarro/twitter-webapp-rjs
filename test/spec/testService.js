@@ -18,14 +18,18 @@
     describe('Service module', function () {
         var srv, $;
 
-        beforeEach(function(done){
+        before(function(done){
             require(['Service', 'jquery'], function(service, jQuery){
                 srv = service;
                 $ = jQuery;
 
-                sinon.spy($, 'ajax');
                 done();
             });
+        });
+
+        beforeEach(function(done){
+            sinon.spy($, 'ajax');
+            done();
         });
 
         afterEach(function(done){
