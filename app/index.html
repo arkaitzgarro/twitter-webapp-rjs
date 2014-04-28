@@ -5,13 +5,52 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
-        <title>twitter webapp</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+        <title>Twitter WebApp</title>
+        <meta name="description" content="Lungo Twitter sample app">
+        <meta name="author" content="Arkaitz Garro (www.arkaitzgarro.com)">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="cleartype" content="on">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- iPhone -->
+        <link href="http://cdn.tapquo.com/lungo/icon-57.png" sizes="57x57" rel="apple-touch-icon-precomposed">
+        <link href="http://cdn.tapquo.com/lungo/startup-image-320x460.png" media="(device-width: 320px) and (device-height: 480px)
+                 and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+
+        <!-- iPhone (Retina) -->
+        <link href="http://cdn.tapquo.com/lungo/icon-114.png" sizes="114x114" rel="apple-touch-icon-precomposed">
+        <link href="http://cdn.tapquo.com/lungo/startup-image-640x920.png" media="(device-width: 320px) and (device-height: 480px)
+                 and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+
+        <!-- iPhone 5 -->
+        <link href="http://cdn.tapquo.com/lungo/startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px)
+                 and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+
+        <!-- iPad -->
+        <link href="http://cdn.tapquo.com/lungo/icon-72.png" sizes="72x72" rel="apple-touch-icon-precomposed">
+        <link href="http://cdn.tapquo.com/lungo/startup-image-768x1004.png" media="(device-width: 768px) and (device-height: 1024px)
+                 and (orientation: portrait)
+                 and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+        <link href="http://cdn.tapquo.com/lungo/startup-image-748x1024.png" media="(device-width: 768px) and (device-height: 1024px)
+                 and (orientation: landscape)
+                 and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+
+        <!-- iPad (Retina) -->
+        <link href="http://cdn.tapquo.com/lungo/icon-144.png" sizes="144x144" rel="apple-touch-icon-precomposed">
+        <link href="http://cdn.tapquo.com/lungo/startup-image-1536x2008.png" media="(device-width: 768px) and (device-height: 1024px)
+                 and (orientation: portrait)
+                 and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+        <link href="http://cdn.tapquo.com/lungo/startup-image-1496x2048.png" media="(device-width: 768px) and (device-height: 1024px)
+                 and (orientation: landscape)
+                 and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bower_components/lungo/lungo.css">
+        <link rel="stylesheet" href="bower_components/lungo/lungo.icon.css">
+        <link rel="stylesheet" href="bower_components/lungo/lungo.theme.css">
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css(.tmp) styles/main.css -->
@@ -23,55 +62,38 @@
 
     </head>
     <body>
-        <!--[if lt IE 10]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+        <section id="main" data-aside="features" data-transition="slide">
+            <header data-title="Twitter Webapp">
+                <nav>
+                    <button data-view-aside="features" data-icon="menu"></button>
+                </nav>
+            </header>
 
-
-        <div class="container">
-            <div class="header">
-                <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <h3 class="text-muted">twitter webapp</h3>
-            </div>
-
-            <div class="jumbotron">
-                <h1>'Allo, 'Allo!</h1>
-                <p class="lead">Always a pleasure scaffolding your apps.</p>
-                <p><a class="btn btn-lg btn-success" href="#">Splendid!</a></p>
-            </div>
-
-            <div class="row marketing">
-                <div class="col-lg-6">
-                    <h4>HTML5 Boilerplate</h4>
-                    <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
-
-
-
-                    <h4>Bootstrap</h4>
-                    <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
-
-                    <h4>Modernizr</h4>
-                    <p>Modernizr is an open-source JavaScript library that helps you build the next generation of HTML5 and CSS3-powered websites.</p>
-
-
-                    <h4>RequireJS</h4>
-                    <p>RequireJS is a JavaScript file and module loader. It is optimized for in-browser use, but it can be used in other JavaScript environments, like Rhino and Node.</p>
+            <article id="main-article" class="active list scroll twitter-list">
+                <div class="form">
+                    <fieldset data-icon="search">
+                        <input type="text" id="search" placeholder="Type something to search...">
+                    </fieldset>
                 </div>
-            </div>
+                <ul data-type="list" data-prototype data-anchor></ul>
+                <div class="main-loading" data-loading></div>
+            </article>
 
-            <div class="footer">
-                <p>♥ from the Yeoman team</p>
-            </div>
+            <article id="main-map">
+                
+            </article>
 
-        </div>
+            <footer>
+                <nav>
+                    <a href="#" data-view-article="main-article" data-icon="time" class="active"></a>
+                    <a href="#" data-view-article="main-map" data-icon="globe"></a>
+                </nav>
+            </footer>
+        </section>
 
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
         <!-- endbuild -->
-</body>
+    </body>
 </html>

@@ -3,8 +3,7 @@ define('Data', ['ydn-db'], function(ydn) {
     
     console.log('Data module started');
 
-    var subscribers = [],
-        latestData = [],
+    var latestData = [],
         lastFilter = {},
         db;
 
@@ -24,32 +23,6 @@ define('Data', ['ydn-db'], function(ydn) {
                     keyPath : cfg.keyPath
                 }]
             });
-        }
-    };
-
-    /**
-     * Add a new subscriber to this data provider
-     * @param  Object obj Adapter object
-     */
-    var subscribe = function (obj) {
-        var exists = false;
-
-        for(var i in subscribers) {
-            exists = (obj === subscribers[i]);
-        }
-
-        if(!exists) {
-            subscribers.push(obj);
-        }
-    };
-
-    /**
-     * Notify all subscribers, data has changed
-     */
-    var notifyAll = function() {
-        console.log(subscribers);
-        for(var i in subscribers) {
-            subscribers[i].notify();
         }
     };
 
@@ -102,7 +75,8 @@ define('Data', ['ydn-db'], function(ydn) {
         var req = db.add({name: cfg.tweetTable, keyPath: cfg.keyPath}, tweet);
         req.done(function(){
             // Refresh data according to new earthquakes
-            prepareData(lastFilter);
+            // prepareData(lastFilter);
+            notifyAll();
             success();
         });
         req.fail(error);
@@ -160,9 +134,13 @@ define('Data', ['ydn-db'], function(ydn) {
         req.fail(error);        
     };
 
+    var notifyAll = function() {
+        var event = new Event('datachange');
+        document.dispatchEvent(event);
+    };
+
     return {
         init : init,
-        subscribe : subscribe,
         addTweet : addTweet,
         addTweets : addTweets,
         getTweet : getTweet,

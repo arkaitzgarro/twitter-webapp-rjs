@@ -1,0 +1,9 @@
+{{#each tweets}}
+    <li class="arrow thumb big selectable" data-id="{{id}}">
+        <img src="{{user.image}}">
+        <div>
+            <strong>{{text}}</strong>
+            <span class="text tiny opacity">{{user.name}}</span>
+        </div>
+    </li>
+{{/each}}
