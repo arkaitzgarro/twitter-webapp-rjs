@@ -1,9 +1,0 @@
-node_modules
-dist
-.tmp
-.sass-cache
-.DS_Store
-._DS_Store
-app/bower_components
-test/bower_components
-server/app_tokens.php
